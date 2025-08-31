@@ -5,17 +5,16 @@ import pytest
 from app.openai_client import get_client
 
 
-
-
 def test_client_initialization():
     client = get_client()
     assert isinstance(client, OpenAI)
+
 
 def test_api_connection():
     client = get_client()
     try:
         response = client.chat.completions.create(
-            model="deepseek-chat",
+            model="gpt-4o",
             messages=[
                 {"role": "system", "content": "You are a helpful assistant."},
                 {"role": "user", "content": "Say 'test' if you can hear me."}
@@ -30,5 +29,6 @@ def test_api_connection():
 
 def test_generate_missing_fields():
     client = TestClient(app)
-    r = client.post('/generate/all',json={"resume_text":"short","job_description":"short"})
+    r = client.post('/generate/all',
+                    json={"resume_text": "short", "job_description": "short"})
     assert r.status_code == 400
