@@ -57,7 +57,7 @@ async def generate_all(req: GenerateRequest):
     )
 
     rb = client.chat.completions.create(
-        model="gpt-4o-mini",
+        model="gpt-4o",
         messages=[
             {"role": "system", "content": RESUME_BULLETS_SYSTEM},
             {"role": "user", "content": rb_user},
